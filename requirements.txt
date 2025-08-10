@@ -1,0 +1,27 @@
+# Core Data Science Libraries
+pandas
+numpy
+scikit-learn
+
+# Data Ingestion
+yfinance
+
+# Visualization
+matplotlib
+seaborn
+
+# Time Series Modeling
+statsmodels
+pmdarima
+# tensorflow
+
+# Portfolio Optimization
+PyPortfolioOpt
+
+# Development & Reporting
+jupyterlab
+nbformat # often needed for notebooks in CI
+
+# Code Quality (for GitHub Workflow)
+flake8
+pytest
