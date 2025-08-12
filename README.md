@@ -23,7 +23,7 @@ By forecasting future trends for a key volatile asset and understanding asset co
 *   📦 **Automated Data Ingestion** – Fetches over a decade of financial data using the `yfinance` API.
 *   📊 **In-Depth EDA** – Analysis of price trends, volatility, return distributions, and risk metrics.
 *   🤖 **Advanced Time Series Forecasting** – A comparative analysis between a classical ARIMA model and a deep learning LSTM model to generate a forward-looking market view.
-*   ⚙️ **Portfolio Optimization (MPT)** – A framework to calculate the Efficient Frontier and identify key portfolios based on forecasted returns.
+*   ⚙️ **Portfolio Optimization (MPT)** – Calculation of the Efficient Frontier and identification of the Maximum Sharpe Ratio portfolio based on the model's forecast.
 *   🧪 **Strategy Backtesting** – A system to validate the performance of the model-driven portfolio against a standard industry benchmark.
 
 ---
@@ -34,39 +34,40 @@ By forecasting future trends for a key volatile asset and understanding asset co
 
 *   Successfully ingested, cleaned, and processed ten years of historical data (July 2015 – July 2025) for TSLA, SPY, and BND.
 *   Conducted in-depth EDA to understand the characteristics of each asset, identifying TSLA's significant volatility compared to the stability of SPY and BND.
-*   Calculated foundational risk metrics like Value at Risk (VaR) to establish a baseline understanding of portfolio risk.
 
 ### ✅ Completed: Task 2 – Developing Time Series Forecasting Models
 
 *   Built and compared a classical ARIMA model with a deep learning LSTM model to forecast Tesla's stock price.
-*   **Key Finding:** The LSTM model vastly outperformed the ARIMA model, demonstrating its superior ability to capture the non-linear dynamics of a volatile asset. The LSTM achieved a Mean Absolute Percentage Error (MAPE) of **4.73%** on the test set, compared to the ARIMA model's **24.05%**.
+*   **Key Finding:** The LSTM model vastly outperformed the ARIMA model, demonstrating its superior ability to capture the non-linear dynamics of a volatile asset.
 
 ### ✅ Completed: Task 3 – Forecasting Future Market Trends
 
 *   Utilized the superior LSTM model to generate a 12-month forward-looking forecast for TSLA.
-*   **Key Finding:** The model projects a significant **bearish trend for TSLA**, with an expected annualized return of **-40.08%**.
-*   Generated 95% confidence intervals for the forecast, visually demonstrating that predictive certainty decreases significantly over the long term. This insight is crucial for risk management.
+*   **Key Finding:** The model projects a significant **bearish trend for TSLA**, with an expected annualized return of **-40.08%**. This became the central hypothesis for our optimization.
+
+### ✅ Completed: Task 4 – Portfolio Optimization
+
+*   Combined the LSTM's bearish forecast for TSLA with the historical returns of SPY and BND.
+*   Generated the Efficient Frontier using Modern Portfolio Theory, which visually confirmed that including the high-risk, negative-return TSLA would be inefficient.
+*   **Key Finding:** The optimal **Maximum Sharpe Ratio Portfolio** recommends a highly defensive allocation, completely avoiding the forecasted downturn in Tesla.
+    *   **TSLA: 0.0%**
+    *   **SPY: 21.8%**
+    *   **BND: 78.2%**
 
 ### ➡️ Next Steps:
 
-#### 🎯 Task 4: Portfolio Optimization
-
-*   Combine the LSTM's bearish forecast for TSLA with the historical returns of SPY and BND to create a vector of expected returns.
-*   Use the historical covariance matrix and the principles of MPT to generate the Efficient Frontier.
-*   Identify and analyze the "Maximum Sharpe Ratio" and "Minimum Volatility" portfolios based on these inputs.
-
 #### 📜 Task 5: Strategy Backtesting & Validation
 
-*   Conduct a one-year backtest of the optimized portfolio strategy.
-*   Compare its performance (total return, Sharpe Ratio) against a passive 60% SPY / 40% BND benchmark to validate the effectiveness of our data-driven approach.
+*   Conduct a one-year backtest of our recommended **(0% TSLA, 21.8% SPY, 78.2% BND)** portfolio.
+*   Compare its performance (total return, Sharpe Ratio) against a passive 60% SPY / 40% BND benchmark to validate the real-world effectiveness of our data-driven approach.
 
 ---
 
-## 🔮 Forecasting Highlights
+## ⚙️ Optimization Highlights
 
-*   **Model Selection:** The LSTM model was unequivocally chosen over ARIMA for its **4x better performance** on the historical test set, proving its value for complex, non-linear assets like TSLA.
-*   **Forward-Looking View:** Our final forecast provides a strong, data-driven signal of a potential **-40% downturn** in TSLA over the next 12 months. This bearish view is the central hypothesis for the portfolio optimization task.
-*   **Risk & Uncertainty:** The forecast's confidence intervals widen dramatically over time. This reinforces a key investment principle: long-term point forecasts are highly unreliable, and models are best used to understand potential trends and risk levels.
+*   **Forecast-Driven Allocation:** The optimization process was directly driven by the LSTM's bearish forecast. The resulting portfolio is not a generic allocation but a specific, tactical response to our model's view on the market.
+*   **Risk-Adjusted Decision:** The recommended portfolio prioritizes the **best risk-adjusted return** (Sharpe Ratio: 0.38). It intelligently avoids the high risk and negative expected return of TSLA in favor of a stable, efficient blend of broad-market equity and bonds.
+*   **Defensive Posture:** The final allocation of **78.2% to bonds (BND)** is a logical consequence of our analytical process, designed to preserve capital and generate stable returns in the face of the forecasted weakness in the high-growth component.
 
 ---
 
@@ -80,12 +81,13 @@ gmf-portfolio-optimization-analysis/
 │   ├── processed/        # Processed data, forecasts
 │   └── raw/              # Raw data from yfinance
 │
-├── models/               # Saved trained models (e.g., final LSTM model)
+├── models/               # Saved trained models
 │
 ├── notebooks/            # Jupyter Notebooks for analysis
 │   ├── 1.0-data_exploration.ipynb
 │   ├── 2.0-forecasting_models.ipynb
-│   └── 3.0-future_trends_forecast.ipynb
+│   ├── 3.0-future_trends_forecast.ipynb
+│   └── 4.0-portfolio_optimization.ipynb
 │
 ├── reports/              # Final reports & figures
 │   └── figures/
@@ -149,6 +151,7 @@ Run the notebooks in the `notebooks/` directory in the following order to reprod
 1.  `1.0-data_exploration.ipynb`
 2.  `2.0-forecasting_models.ipynb`
 3.  `3.0-future_trends_forecast.ipynb`
+4.  `4.0-portfolio_optimization.ipynb`
 
 ---
 
