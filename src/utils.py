@@ -49,6 +49,61 @@ def load_and_combine_adj_close(tickers):
     
     return combined_df
 
+def create_full_processed_dataset(tickers, window=30):
+    """
+    Loads raw data for a list of tickers, calculates key features for each,
+    and combines them into a single, wide-format DataFrame.
+
+    Features calculated for each ticker:
+    - Daily Return
+    - Rolling Mean (based on Adj Close)
+    - Rolling Std Dev (Volatility, based on Adj Close)
+
+    Args:
+        tickers (list): A list of stock ticker symbols (e.g., ['TSLA', 'BND', 'SPY']).
+        window (int): The window size for rolling calculations.
+
+    Returns:
+        pandas.DataFrame: A single DataFrame containing all features for all tickers,
+                          with columns suffixed by the ticker name (e.g., 'Adj Close_TSLA').
+    """
+    processed_list = []
+    for ticker in tickers:
+        file_path = f'../data/raw/{ticker.lower()}_raw.csv'
+        try:
+            df = pd.read_csv(file_path, index_col='Date', parse_dates=True)
+            # Standardize column names for consistency
+            df.columns = [col.title().replace(' ', '_') for col in df.columns]
+
+        except FileNotFoundError:
+            print(f"Error: Raw data file for {ticker} not found at {file_path}")
+            return pd.DataFrame()
+
+        # --- Feature Engineering (as per Task 1) ---
+
+        # 1. Calculate Daily Percentage Change (Daily Return)
+        df['Daily_Return'] = df['Close'].pct_change()
+
+        # 2. Calculate Rolling Mean and Standard Deviation (Volatility)
+        df[f'Rolling_Mean_{window}D'] = df['Close'].rolling(window=window).mean()
+        df[f'Rolling_Std_{window}D'] = df['Close'].rolling(window=window).std()
+
+        # --- Add Suffix to all columns to identify the ticker ---
+        df = df.add_suffix(f'_{ticker}')
+        processed_list.append(df)
+
+    # Combine all individual processed dataframes into one
+    if not processed_list:
+        print("Could not process any data.")
+        return pd.DataFrame()
+
+    full_df = pd.concat(processed_list, axis=1)
+
+    # Drop initial rows with NaN values resulting from rolling calculations
+    full_df.dropna(inplace=True)
+
+    return full_df
+
 def calculate_daily_returns(prices_df):
     """Calculates the daily percentage change in prices."""
     return prices_df.pct_change().dropna()
