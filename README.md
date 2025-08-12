@@ -2,7 +2,7 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-An end-to-end quantitative analysis project to enhance portfolio management strategies for Guide Me in Finance (GMF) Investments. This repository documents the process of fetching financial data, developing predictive time series models, and constructing an optimal investment portfolio based on Modern Portfolio Theory (MPT).
+An end-to-end quantitative analysis project to enhance portfolio management strategies for Guide Me in Finance (GMF) Investments. This repository documents the process of fetching financial data, developing predictive time series models, constructing an optimal investment portfolio based on Modern Portfolio Theory (MPT), and validating the strategy through a historical backtest.
 
 ---
 
@@ -14,7 +14,7 @@ As a Financial Analyst at GMF Investments, the objective is to leverage data-dri
 *   **S&P 500 ETF (SPY):** Diversified, moderate-risk market benchmark.
 *   **Vanguard Total Bond Market ETF (BND):** Stable, low-risk bond fund.
 
-By forecasting future trends for a key volatile asset and understanding asset correlations, we aim to build and validate a portfolio that maximizes risk-adjusted returns, grounded in proven financial theories.
+By forecasting future trends for a key volatile asset and understanding asset correlations, we built and validated a portfolio that maximizes risk-adjusted returns, grounded in proven financial theories. The final model-driven strategy proved to be more efficient and less volatile than a traditional benchmark portfolio.
 
 ---
 
@@ -24,7 +24,7 @@ By forecasting future trends for a key volatile asset and understanding asset co
 *   📊 **In-Depth EDA** – Analysis of price trends, volatility, return distributions, and risk metrics.
 *   🤖 **Advanced Time Series Forecasting** – A comparative analysis between a classical ARIMA model and a deep learning LSTM model to generate a forward-looking market view.
 *   ⚙️ **Portfolio Optimization (MPT)** – Calculation of the Efficient Frontier and identification of the Maximum Sharpe Ratio portfolio based on the model's forecast.
-*   🧪 **Strategy Backtesting** – A system to validate the performance of the model-driven portfolio against a standard industry benchmark.
+*   🧪 **Strategy Backtesting** – Validation of the optimized portfolio's performance against a standard industry benchmark, confirming superior risk-adjusted returns.
 
 ---
 
@@ -48,26 +48,29 @@ By forecasting future trends for a key volatile asset and understanding asset co
 ### ✅ Completed: Task 4 – Portfolio Optimization
 
 *   Combined the LSTM's bearish forecast for TSLA with the historical returns of SPY and BND.
-*   Generated the Efficient Frontier using Modern Portfolio Theory, which visually confirmed that including the high-risk, negative-return TSLA would be inefficient.
-*   **Key Finding:** The optimal **Maximum Sharpe Ratio Portfolio** recommends a highly defensive allocation, completely avoiding the forecasted downturn in Tesla.
+*   Generated the Efficient Frontier using Modern Portfolio Theory, which visually confirmed that including TSLA would be inefficient.
+*   **Key Finding:** The optimal **Maximum Sharpe Ratio Portfolio** recommends a highly defensive allocation:
     *   **TSLA: 0.0%**
     *   **SPY: 21.8%**
     *   **BND: 78.2%**
 
-### ➡️ Next Steps:
+### ✅ Completed: Task 5 – Strategy Backtesting & Validation
 
-#### 📜 Task 5: Strategy Backtesting & Validation
-
-*   Conduct a one-year backtest of our recommended **(0% TSLA, 21.8% SPY, 78.2% BND)** portfolio.
-*   Compare its performance (total return, Sharpe Ratio) against a passive 60% SPY / 40% BND benchmark to validate the real-world effectiveness of our data-driven approach.
+*   Conducted a one-year backtest of our recommended portfolio against a passive 60% SPY / 40% BND benchmark.
+*   **Key Finding:** The model-driven strategy was **more efficient and less volatile**, achieving a superior risk-adjusted return.
 
 ---
 
-## ⚙️ Optimization Highlights
+## 🏆 Final Results & Validation
 
-*   **Forecast-Driven Allocation:** The optimization process was directly driven by the LSTM's bearish forecast. The resulting portfolio is not a generic allocation but a specific, tactical response to our model's view on the market.
-*   **Risk-Adjusted Decision:** The recommended portfolio prioritizes the **best risk-adjusted return** (Sharpe Ratio: 0.38). It intelligently avoids the high risk and negative expected return of TSLA in favor of a stable, efficient blend of broad-market equity and bonds.
-*   **Defensive Posture:** The final allocation of **78.2% to bonds (BND)** is a logical consequence of our analytical process, designed to preserve capital and generate stable returns in the face of the forecasted weakness in the high-growth component.
+The one-year backtest confirmed the value of our data-driven approach. While the benchmark portfolio had a higher absolute return, our strategy delivered a **better return for each unit of risk taken.**
+
+| Portfolio | Total Return | **Sharpe Ratio (Risk-Adjusted Return)** |
+| :--- | :--- | :--- |
+| **Our Strategy** | 6.52% | **1.07** |
+| **Benchmark (60/40)** | 12.47% | **1.02** |
+
+The higher Sharpe Ratio demonstrates that our strategy successfully translated the model's forecast into a more stable and efficient portfolio, fulfilling the core project objective.
 
 ---
 
@@ -86,8 +89,9 @@ gmf-portfolio-optimization-analysis/
 ├── notebooks/            # Jupyter Notebooks for analysis
 │   ├── 1.0-data_exploration.ipynb
 │   ├── 2.0-forecasting_models.ipynb
-│   ├── 3.0-future_trends_forecast.ipynb
-│   └── 4.0-portfolio_optimization.ipynb
+│   ├── 3.0-forecast_future_market_trends.ipynb
+│   ├── 4.0-optimize_portfolio_based_on_forecast.ipynb
+│   └── 5.0-strategy_backtesting.ipynb
 │
 ├── reports/              # Final reports & figures
 │   └── figures/
@@ -147,11 +151,7 @@ Open Jupyter Lab or Jupyter Notebook:
 jupyter lab
 ```
 
-Run the notebooks in the `notebooks/` directory in the following order to reproduce the analysis:
-1.  `1.0-data_exploration.ipynb`
-2.  `2.0-forecasting_models.ipynb`
-3.  `3.0-future_trends_forecast.ipynb`
-4.  `4.0-portfolio_optimization.ipynb`
+Run the notebooks in the `notebooks/` directory in sequential order to reproduce the entire analysis from start to finish.
 
 ---
 
